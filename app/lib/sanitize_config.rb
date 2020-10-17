@@ -54,11 +54,11 @@ class Sanitize
     ADD_SPANTAG_TO_HASHTAG = lambda do |env|
       return unless env[:node_name] == 'a'
 
-      current_node = env[:node]
-      class_list = current_node&.split(/[\t\n\f\r ]/)
+      node = env[:node]
+      class_list = node['class'].split(/[\t\n\f\r ]/)
 
       if 'hashtag'.in?(class_list)
-        current_node.text.gsub! '#', '<span class="hash_char">#</span>'
+        node.text.gsub! '#', '<span class="hash_char">#</span>'
       else
         return
       end
