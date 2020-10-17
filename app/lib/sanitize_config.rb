@@ -51,6 +51,19 @@ class Sanitize
       current_node.replace(current_node.text) unless LINK_PROTOCOLS.include?(scheme)
     end
 
+    ADD_SPANTAG_TO_HASHTAG = lambda do |env|
+      return unless env[:node_name] == 'a'
+
+      current_node = env[:node]
+      class_list = current_node&.split(/[\t\n\f\r ]/)
+
+      if 'hashtag'.in?(class_list)
+        current_node.text.gsub! '#', '<span class="hash_char">#</span>'
+      else
+        return
+      end
+    end
+
     UNSUPPORTED_ELEMENTS_TRANSFORMER = lambda do |env|
       return unless %w(h1 h2 h3 h4 h5 h6 ul ol li).include?(env[:node_name])
 
