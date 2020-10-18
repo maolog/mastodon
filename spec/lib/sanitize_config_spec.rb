@@ -42,5 +42,9 @@ describe Sanitize::Config do
     it 'keeps a with href' do
       expect(Sanitize.fragment('<a href="http://example.com">Test</a>', subject)).to eq '<a href="http://example.com" rel="nofollow noopener noreferrer" target="_blank">Test</a>'
     end
+
+    # it 'add a span tag to hash tag' do
+    #   expect(Sanitize.fragment('<a href="https://example.com/tags/example" class="mention hashtag" rel="tag">#<span>example</span></a>', subject)).to eq '<a href="https://example.com/tags/example" class="mention hashtag" rel="nofollow noopener noreferrer" target="_blank"><span class="hash_char">#</span><span>example</span></a>'
+    # end
   end
 end

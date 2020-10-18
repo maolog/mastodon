@@ -57,11 +57,9 @@ class Sanitize
       node = env[:node]
       class_list = node['class'].split(/[\t\n\f\r ]/)
 
-      if 'hashtag'.in?(class_list)
-        node.text.gsub! '#', '<span class="hash_char">#</span>'
-      else
-        return
-      end
+      return unless 'hashtag'.in?(class_list)
+
+      node.text.gsub! '#', '<span class="hash_char">#</span>'
     end
 
     UNSUPPORTED_ELEMENTS_TRANSFORMER = lambda do |env|
