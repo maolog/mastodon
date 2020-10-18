@@ -57,7 +57,7 @@ class Sanitize
       node = env[:node]
       class_list = node['class'].split(/[\t\n\f\r ]/)
 
-      return unless 'hashtag'.in?(class_list)
+      return unless class_list.include?('hashtag')
 
       node.text.gsub! '#', '<span class="hash_char">#</span>'
     end
